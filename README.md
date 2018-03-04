@@ -12,6 +12,10 @@ User Can Set New Password If They Forgot There Password <br/>
 2.There Is Way To Add New Test, New Questions Which Is All Done From Admin Side, The Admin Can Add,Update, Delete Any Question <br/>
 Any Question, Any Test.<br/>
 <br/>
+
+## You Can Visit Site - <br/>
+http://ec2-13-126-30-1.ap-south-1.compute.amazonaws.com:1993 <br/>
+
 ## Frontend Technologies : <br/>
 HTML 5, CSS, Javascript , Jquery and AngularJS <br/>
 <br/>
