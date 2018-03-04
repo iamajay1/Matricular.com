@@ -38,9 +38,9 @@ module.exports = function(passport) {
     passport.use(new FacebookStrategy({
 
         // pull in our app id and secret from our auth.js file
-        clientID        : '1651901691564466',
-        clientSecret    : '20739544c3cce80d25750e1d6bd93dbe',
-        callbackURL     : 'http://localhost:8080/auth/facebook/callback'
+        clientID        : 'Enter Your Facebook ID',
+        clientSecret    : 'Enter Your Secret Key',
+        callbackURL     : 'http://localhost:1993/auth/facebook/callback'
 
     },
 
