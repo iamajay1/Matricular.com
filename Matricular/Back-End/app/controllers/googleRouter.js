@@ -5,8 +5,8 @@ var logger =require('morgan');
 //app.use(require('morgan')('combined'));
 var GoogleUser = require('../models/GoogleUser');
 
-var GOOGLE_CLIENT_ID = "1045128806688-99h8mq895370g4n940uc8di3ua2for8o.apps.googleusercontent.com",
-    GOOGLE_CLIENT_SECRET = "fX-6VgeRstyf6BAur-zv7dbx";
+var GOOGLE_CLIENT_ID = "Enter Your Google ID",
+    GOOGLE_CLIENT_SECRET = "Enter Your Secret Key";
 
 module.exports = function (passport) {
 passport.use(require('morgan')('combined'));
