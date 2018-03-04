@@ -179,8 +179,8 @@ app.post('/forgotPass', function(req, res) {
       var smtpTransport = nodemailer.createTransport({
         service: 'gmail', 
         auth: {
-          user: 'ajay.jadhav.akj@gmail.com',
-          pass: 'ajay@9545534349'//process.env.GMAILPW
+          user: 'Enter Your Email ID',
+          pass: 'Your Email Password'//process.env.GMAILPW
         },
       tls: {
           rejectUnauthorized: false
@@ -234,8 +234,8 @@ app.post('/reset/:token',function(req, res) {
       var transporter = nodemailer.createTransport({
         service: 'gmail',
         auth: {
-          user: "ajay.jadhav.akj@gmail.com",
-          pass: "ajay@9545534349"
+          user: "Enter Your Email ID",
+          pass: "Enter Your Email Password"
         },
       tls: {
           rejectUnauthorized: false
