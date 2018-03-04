@@ -1,0 +1,134 @@
+   <!-- Navigation -->
+<div ng-controller="liveTestCtrl as buffertest">
+    <nav class="navbar navbar-expand-lg navbar-light fixed-top" id="mainNav">
+      <div class="container">
+        <a class="navbar-brand js-scroll-trigger" href="">Matricular</a>
+        <button class="navbar-toggler navbar-toggler-right" type="button" data-toggle="collapse" data-target="#navbarResponsive" aria-controls="navbarResponsive" aria-expanded="false" aria-label="Toggle navigation">
+          Menu
+          <i class="fa fa-bars"></i>
+        </button>
+        <div class="collapse navbar-collapse" id="navbarResponsive">
+          <ul class="navbar-nav ml-auto">
+            <li class="nav-item">
+              <a class="nav-link js-scroll-trigger"  style="color:#000;">{{buffertest.username}}</a>
+            </li>
+            <li class="nav-item">
+              <a class="nav-link js-scroll-trigger" href="" style="color:#000;" ng-click="buffertest.logout()">logout</a>
+            </li>
+          </ul>
+        </div>
+      </div>
+    </nav>
+  
+
+  <section>
+<div class="container">        
+    <div class="col-lg-12 my-auto space" >
+        <div class="container-fluid">
+            <div class="container_1">
+			<div class="row">
+             
+			<span class="border border-warning">
+				<div class="card" id="quizContainer">
+					<div class="card-header" id="quiz-time-left">
+						<a class="btn btn-link"></a>					
+						<a style="padding-right:100px;">{{buffertest.quizHeading}}</a>
+					</div>
+					<div class="card-body" >
+						<div class="table-responsive">
+							<table class="table ">
+								<thead>
+									<tr>
+										<td id="question" style="font-size:14px;font-weight:bold;color:red"></td>
+									</tr>
+								</thead>
+								<tbody>
+									<tr class="radio">
+										<td><input type="radio" class="form-control1" name="option" value="1" /> <span  id="opt1"></span></td>
+								    <td><input type="radio" class="form-control1" name="option" value="2" /> <span  id="opt2"></span></td>	
+									</tr>
+									<tr class="radio">
+
+										<td><input type="radio" class="form-control1" name="option" value="3" /> <span  id="opt3"></span></td>	
+									<td><input type="radio" class="form-control1" name="option" value="4" /> <span  id="opt4"></span></td>
+									</tr>
+									<tr><td style="padding-left:500px;" colspan="2"><button id="nextButton"  class="btn btn-link" ng-click="buffertest.loadNextQuestion()">Next Question </button></td></tr>
+								</tbody>
+							</table>			
+						</div>
+					</div>
+					
+				</div>
+				<div class="card" id="userPerform">
+					<div class="card-header">
+						<a class="btn btn-link space1" ></a>					
+						<a class="title-space"><b>{{buffertest.username}}</b></a>
+					</div>
+					<div class="card-body">
+						<div class="table-responsive">
+							<table class="table  table-light">
+								<thead class="thead-dark">
+									<tr>
+										<td colspan="2">User ID: {{buffertest.performanceUserID}}</td>
+									</tr>
+								</thead>
+								<tbody>
+									<tr>
+										<td style="color:green">Test Correct Answers: {{buffertest.answerscorrect}}</td>
+										<td style="color:red">Test Wrong Answers: {{buffertest.answerswrong}}</td>
+									</tr>
+									<tr>
+										<td style="color:blue">Total Score Secured: {{buffertest.securedscore}}</td>
+										<td>Total Time Taken: {{buffertest.timeTaken}} Sec</td>
+									</tr>
+
+								</tbody>
+							</table>			
+						</div>
+					</div>
+					<div class="card-footer space4" >
+						<a class="btn btn-danger"  ng-href="#/takeTest/{{buffertest.userId}}"> Close </a>
+					</div>
+				</div>
+			</span>
+			</div>
+			</div>	
+        </div>
+    </div>
+</div>
+    
+  </section>
+  <!-- model for test type view -->			
+<div class="modal fade testInstructions" id="testInstructions">
+	<div class="modal-dialog">
+		<div class="modal-content">
+
+			<!-- Modal Header -->
+			<div class="modal-header">
+				<h4 class="modal-title"><b>Please Read The All Instructions Before to Start Test!</b></h4>
+
+			</div>
+
+			<!-- Modal body -->
+			<div class="modal-body">
+				<ul class="list-group">
+					<li class="list-group-item list-group-item-warning">Total Number Of Questions : 5.</li>
+					<li class="list-group-item list-group-item-warning">Time Alloted:5 Minutes.</li>
+					<li class="list-group-item list-group-item-warning">Once Time Over The Window Will Close And Show The Result.</li>
+					<li class="list-group-item list-group-item-warning">Each Question Carry 1 Mark, No Negative Marks.</li>
+					<li class="list-group-item list-group-item-warning">Do Not Refresh Page.</li>
+					<li class="list-group-item list-group-item-success">All The Best :-).				
+				</ul>	
+			</div> <!-- model body close-->
+			<div class="modal-footer">
+				<button type="button" class="btn btn-success" ng-click="buffertest.loadQuestion(0)">Start Test.</button>
+				<a class="btn btn-danger" ng-href="#/takeTest/{{buffertest.userId}}" id="return">Return</a>
+			</div>
+		</div><!-- model content close-->
+	</div><!-- model dialog close-->
+</div><!-- model fade-->
+</div>
+
+<script type="text/javascript">
+  
+</script> 

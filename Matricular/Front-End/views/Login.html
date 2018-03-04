@@ -1,0 +1,66 @@
+   <!-- Navigation -->
+    <nav class="navbar navbar-expand-lg navbar-light fixed-top" id="mainNav">
+      <div class="container">
+        <a class="navbar-brand js-scroll-trigger" href="">Matricular</a>
+        <button class="navbar-toggler navbar-toggler-right" type="button" data-toggle="collapse" data-target="#navbarResponsive" aria-controls="navbarResponsive" aria-expanded="false" aria-label="Toggle navigation">
+          Menu
+          <i class="fa fa-bars"></i>
+        </button>
+        <div class="collapse navbar-collapse" id="navbarResponsive">
+          <ul class="navbar-nav ml-auto">
+            <li class="nav-item">
+              <a class="nav-link js-scroll-trigger" href="#/login">Login</a>
+            </li>
+            <li class="nav-item">
+              <a class="nav-link js-scroll-trigger" href="#/signup">Signup</a>
+            </li>
+          </ul>
+        </div>
+      </div>
+    </nav>
+    <header class="masthead">
+      <div class="container h-100">
+        <div class="row h-100">
+          <div class="col-lg-12 my-auto">
+            <div class="header-content mx-auto">
+				<div ng-controller="indexCtrl as index">			
+            <div class="card" style="color:#000;">
+				<div class="card-header text-center">
+				
+						<h4><i class="fa fa-key"> </i> <b>LOGIN</b></h4>
+			    </div>
+
+				<div class="card-body">
+						<form method="post" ng-submit="index.submitLog()">
+							<div class="form-group">
+								<label for="email">Email</label>
+								<input type="email" class="form-control"  placeholder="Email" name="email" ng-model="index.email"  required = "true">
+							</div>
+							<div class="form-group">
+							<label for="password">Password</label>
+							<input type="password" class="form-control" placeholder="Password" name="password" ng-model="index.password" required = "true">
+							</div>
+							<div class="text-center">
+						    <button type="submit" name="submit" class="btn btn-xl btn-dark">Login</button>
+							</div>
+						<br/>
+							<div class="text-center">
+								<a href="/#/forgot"  onclick="myModel();" class="btn-link">Forgot Password?</a>
+							</div>
+						</form>
+				</div>
+					
+				<div class="card-footer" align="center">
+						        <button class="btn btn-xl btn-primary" ng-click="index.submitFacebook()"><i class="fa fa-facebook"></i> Facebook Login</button> &nbsp; | &nbsp;
+				        <button class="btn btn-xl btn-danger" ng-click="index.submitGoogle()"><i class="fa fa-google"></i> Google Login</button> 
+				</div>
+					
+				
+		    </div>
+		   </div> <!--end ng-controller -->		
+            </div>
+          </div>
+          
+        </div>
+      </div>
+    </header>

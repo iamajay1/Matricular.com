@@ -1,0 +1,169 @@
+   <!-- Navigation -->
+<div ng-controller="userDashCtrl as dashboard">
+    <nav class="navbar navbar-expand-lg navbar-light fixed-top" id="mainNav">
+      <div class="container">
+        <a class="navbar-brand js-scroll-trigger" href="">Matricular</a>
+        <button class="navbar-toggler navbar-toggler-right" type="button" data-toggle="collapse" data-target="#navbarResponsive" aria-controls="navbarResponsive" aria-expanded="false" aria-label="Toggle navigation">
+          Menu
+          <i class="fa fa-bars"></i>
+        </button>
+        <div class="collapse navbar-collapse" id="navbarResponsive">
+          <ul class="navbar-nav ml-auto">
+            <li class="nav-item">
+              <a class="nav-link js-scroll-trigger"  style="color:#000;">{{dashboard.username}}</a>
+            </li>
+            <li class="nav-item">
+              <a class="nav-link js-scroll-trigger" href="" style="color:#000;" ng-click="dashboard.logout()">logout</a>
+            </li>
+          </ul>
+        </div>
+      </div>
+    </nav>
+  
+
+  <section> 
+	<div class="container">
+      <div class="section-heading text-center">
+        <h2>Matricular</h2>
+        <p class="text-muted">An Live Test Taking System!</p>
+        <hr>
+      </div>
+      <div class="row">
+        <div class="col-lg-4">
+          <div class="card" style="color:#000;">
+		  <div class="card-header bg-warning text-center">
+			<h4><b>Statistics</b></h4>
+		  </div>
+		  <div class="card-body text-center">
+		  
+			Test Attempt <hr class="hr_1">			
+		  
+		  
+			<b>{{dashboard.testtaken}} </b>
+		  <hr class="hr1">
+		  
+		  
+			Average Score Per Test<hr class="hr_1">
+				
+			<b>{{dashboard.averagemark}} </b>
+		  
+		  
+		  </div>
+		  </div>
+		  </div>
+		  <div class="col-lg-8 my-auto">
+          <div class="container-fluid">
+            <div class="row">
+
+			<span class="border border-warning">
+				<div style="padding:10px;">
+				<input id="tab4" type="radio" name="tabs" checked>
+				<label for="tab4">Test Attempted</label>
+				
+				<input id="tab3" type="radio" name="tabs">
+				<label for="tab3" id="graph" data-testid=" {{dashboard.testtakenDetailsforgraph}} " data-user="{{dashboard.testtakenDetailslabels}}">Performance</label>
+				
+	
+				
+				<span class="space3"><a ng-href="#/takeTest/{{dashboard.userId}}"><button type="submit" value="Take-test"  class="btn btn-xl btn-dark" >Take Test</button></a></span>
+				
+				<div id="content3" class="section">
+					<p>
+
+					<h5 align="center">Your Performance as Per Chart</h5>
+							
+					<div class="card">
+					<div class="card-body" id="pnlchart">
+					<canvas id="myChart"></canvas>
+					</div>
+					</div>
+						
+
+					</p>
+				
+				</div>
+    
+				<div id="content4" class="section">
+					<p>
+					<div ng-if="dashboard.testtakenDetails.length >0">
+						<h4 style="padding-left:25%;">Test Attempted By You</h4>
+						<div ng-repeat="userTest in dashboard.testtakenDetails">
+
+							<div class="table-responsive">
+								<table class="table">
+									<thead class="thead-dark">
+									<tr>
+										
+									<h5><b><th>	Test Name</td><th>:</th><th>{{userTest.testName}}</th></b></h5>
+
+									</tr>
+									</thead>
+									<tbody>
+									<tr>
+									
+										<h5><b><td>Total Correct Answers</td><td>:</td><td>{{userTest.totalCorrectAnswers}}</td></b></h5>					
+									<tr>
+									
+										
+									<tr>
+									    <h5><b><td>Total Wrong Answers</td><td>:</td><td>{{userTest.totalWrongAnswers}}<td></b></h5>
+
+									</tr>
+									<tr>
+									    <h5><b><td>Score</td><td>:</td><td>{{userTest.score}}<td></b></h5>
+
+									</tr>
+                 
+									<tr>
+										<h5><b><td>Time Taken</td><td>:</td><td>{{userTest.timeTaken}} Sec</td><b></h5>
+
+									</tr>
+									<tr>
+									
+										<h5><b><td>Test Taken At</td><td>:</td><td>{{userTest.testTakenDateTime | date: "MMM dd,y"}} at {{userTest.testTakenDateTime | date: "HH:mm"}}</td></b></h5>	
+
+									
+									</tr>
+									</tbody>
+								</table>
+							</div>
+						
+						
+					</div>	
+					</p>
+					
+				</div>
+				<div ng-if="dashboard.testtakenDetails.length===0">
+						<h4 align="center">No Test Attempted yet!!!...</h4>
+				</div>
+				<div>
+			</span>
+           </div>
+            
+          </div>
+        </div>
+      </div>
+    </div>
+	<!-- model for test type view -->			
+				<div class="modal fade" id="myModal">
+					<div class="modal-dialog">
+						<div class="modal-content" >
+
+							<!-- Modal Header -->
+							<div class="modal-header">
+								<h4 class="modal-title"><b>{{dashboard.testName}}</b></h4>
+								<button type="button" class="close" data-dismiss="modal">&times;</button>
+							</div>
+
+							<!-- Modal body -->
+							<div class="modal-body">
+							
+							</div> <!-- model body close-->
+							<div class="modal-footer">
+									<button type="button" class="btn btn-danger" data-dismiss="modal">Close</button>
+							</div>
+						</div><!-- model content close-->
+					</div><!-- model dialog close-->
+				</div><!-- model fade-->	
+  </section>
+  </div>

@@ -1,0 +1,64 @@
+   <!-- Navigation -->
+<div ng-controller="takeTestCtrl as test">
+    <nav class="navbar navbar-expand-lg navbar-light fixed-top" id="mainNav">
+      <div class="container">
+        <a class="navbar-brand js-scroll-trigger" href="">Matricular</a>
+        <button class="navbar-toggler navbar-toggler-right" type="button" data-toggle="collapse" data-target="#navbarResponsive" aria-controls="navbarResponsive" aria-expanded="false" aria-label="Toggle navigation">
+          Menu
+          <i class="fa fa-bars"></i>
+        </button>
+        <div class="collapse navbar-collapse" id="navbarResponsive">
+          <ul class="navbar-nav ml-auto">
+            <li class="nav-item">
+              <a class="nav-link js-scroll-trigger"  style="color:#000;">{{test.username}}</a>
+            </li>
+            <li class="nav-item">
+              <a class="nav-link js-scroll-trigger" href="" style="color:#000;" ng-click="test.logout()">logout</a>
+            </li>
+          </ul>
+        </div>
+      </div>
+    </nav>
+  
+
+  <section>
+    <div class="container">
+      <div class="section-heading text-center">
+        <h2>Matricular</h2>
+        <p class="text-muted">An Live Test Taking System!</p>
+        <hr>
+      </div>
+      
+        
+        <div class="col-lg-12 my-auto space" >
+          <div class="container-fluid">
+            <div class="row">
+             
+			<span class="border border-warning">
+				<div class="card" ng-init="test.getTests()">
+					<div class="card-header">
+					<a class="btn btn-link back-space" ng-href="#/dashboard/{{test.userId}}" >Back</a>					
+						<a style="color:red;">Attempt Any One Test</a>
+					</div>
+					<div class="card-body" ng-repeat="tests in test.testArray track by $index">
+					<div class="table-responsive">
+					<table class="table">
+					<tr>
+					<td class="space"><a ng-href="#/bufferTestFetch/{{tests._id}}/{{test.userId}}" class="btn btn-link">{{tests.testName}} <i class="fa fa-external-link"></i></a><br/>
+					
+					<a class="btn text-dark" href="">{{tests.testCategory}} </a></td><td align="right" style="color:green;">{{tests.totalScore}} Marks</td>
+					</tr>
+					</table>
+					</div>
+					</div>
+				</div>
+			</span>
+           </div>
+            
+          </div>
+        </div>
+    </div>
+    
+  </section>
+  </div>
+

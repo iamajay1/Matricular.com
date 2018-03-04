@@ -1,0 +1,378 @@
+
+   <!-- Navigation -->
+<div ng-controller="adminCtrl as admin">
+    <nav class="navbar navbar-expand-lg navbar-light fixed-top" id="mainNav">
+      <div class="container">
+        <a class="navbar-brand js-scroll-trigger" href="">Matricular</a>
+        <button class="navbar-toggler navbar-toggler-right" type="button" data-toggle="collapse" data-target="#navbarResponsive" aria-controls="navbarResponsive" aria-expanded="false" aria-label="Toggle navigation">
+          Menu
+          <i class="fa fa-bars"></i>
+        </button>
+        <div class="collapse navbar-collapse" id="navbarResponsive">
+          <ul class="navbar-nav ml-auto">
+            <li class="nav-item">
+              <a class="nav-link js-scroll-trigger"  style="color:#000;">{{admindash.username}}</a>
+            </li>
+            <li class="nav-item">
+              <a class="nav-link js-scroll-trigger" href="" style="color:#000;" ng-click="admindash.logout()">logout</a>
+            </li>
+          </ul>
+        </div>
+      </div>
+    </nav>
+	
+	
+<!-- middle section-->
+  <section>
+    <div class="container">
+      <div class="section-heading text-center">
+        <h2>Matricular</h2>
+        <p class="text-muted">An Live Test Taking System!</p>
+        <hr>
+      </div>
+        <div class="col-lg-12 my-auto" id="dashAdmin">
+			<div class="row space">
+			<span class="border border-warning">
+				<div style="padding:10px;">
+				<input id="tab1" type="radio" name="tabs" checked>
+				<label for="tab1">Test</label>
+				<input id="tab2" type="radio" name="tabs">
+				<label for="tab2">User Details</label>
+				<input id="tab3" type="radio" name="tabs">
+				<label for="tab3">User Performance</label>
+				<span class="space1">
+					
+						<button type="submit" value="Take-test"  id="btnCreate" class="btn btn-xl btn-dark" data-toggle="tooltrip" title="Create Test">
+							create Test
+						</button>
+					
+				</span>
+				
+				
+				<div id="content1" class="section" ng-init="admindash.getTests()">
+						
+					<p ng-repeat="test in admindash.testArray track by $index">
+					
+					<a ng-href="#/Admin/QuestionInfo/{{admindash.userId}}/{{test._id}}/{{test.testName}}" class="btn-link" style="padding-left:50px;">{{test.testName}} <i class="fa fa-external-link"> </i> </a>
+					<span class="space2">
+					<button class="btn btn-outline1"  ng-click="admindash.getSingleTest(test._id)" data-id="{{test._id}}" data-toggle="modal"  title="View Test" id="viewbtn" data-target="#myModal2"><i class="fa fa-eye"></i> </button>
+				    <button class="btn btn-outline1"  ng-click="admindash.getSingleTestDetUpdate(test._id)" title="Update Test" data-toggle="tooltrip" id="updatebtn" ><i class="fa fa-pencil-square-o"></i> </button>
+					<button type="button" class="btn btn-outline1" id="btnDeleteTest" ng-click="admindash.deleteATest(test._id)" data-id="{{test._id}}" title="Delete Test"><i class="fa fa-trash-o"> </i> </button>		
+					
+					</span>
+					
+					
+					</p>
+					
+					
+				</div>
+				
+				<div id="content2" class="section" ng-init="admindash.getUserInfoforperformance()">
+					<p>
+						
+						<div class="card" ng-if="admindash.userInfo.length >0">
+						
+						<div class="card-body" ng-repeat="user in admindash.userInfo track by $index">
+						   <div ng-show=user.name!='Admin'>
+						   <div class="table-responsive">
+								<table class="table table-light table-hover">
+									<thead class="thead-dark">
+										<tr><th>ID</th><th>:</th> <th>{{user._id}}</th></tr>
+									</thead>
+									<tbody>
+										<tr><td>Name</td><td>:</td> <td>{{user.name}}</td></tr>
+										<tr><td>Email</td><td>:</td> <td>{{user.email}}</td></tr>
+										<tr><td>Mobile No.</td><td>:</td> <td>{{user.mobileNumber}}</td></tr>
+									</tbody>
+								</table>
+							</div>
+						   </div>
+						</div>
+						</div>
+						<div class="card" ng-if="admindash.userInfo.length===0">
+						<div class="card-body">
+						 <h2 align="center">No User Find!</h2>
+						</div>
+						</div>	
+					</p>
+				</div>
+				<div id="content3" class="section">
+					<div id="allUsers">
+					<p>
+					<div ng-init="admindash.getUserInfoforperformance()">		
+					<div class="card" ng-if="admindash.userInfo.length >0">
+
+						<div class="card-body" ng-repeat="user in admindash.userInfo track by $index">
+						   <div ng-show=user.name!='Admin'>
+							<div class="table-responsive">
+								<table class="table table-light">
+									
+									<tbody>
+										<tr><td>
+										<button id= "btnViewPerform" ng-click="admindash.getUserPerformanceDet(user._id)" class="btn btn-link" >
+										{{user.name}} <i class="fa fa-external-link"> </i>
+										</button> 
+										</td></tr>
+									
+									</tbody>
+								</table>
+							</div>
+						   </div>
+						</div>
+					</div>
+																			  
+					<div class="card" ng-if="admindash.userInfo.length===0">
+						<div class="card-body">
+							<h2 align="center">No User Find!</h2>
+						</div>
+					</div>
+					</div>
+					</p>
+					</div>
+<!-- performance of user-->
+<div id="pnlViewUserTestDet">
+<p>
+	<button class="btn btn-link" id="backTonames">Back</button>
+	<div ng-if="admindash.userTestPerform.length >0">
+		<div class="card">
+		
+			<div class="card-body" ng-repeat="userTest in admindash.userTestPerform track by $index" >
+				<div class="table-responsive">
+					<table class="table table-light table-hover">
+						<thead class="thead-dark">
+							<tr><th>Test Name</th><th>:</th><th>{{userTest.testName}}</th></tr>
+						</thead>
+						<tbody>
+							<tr><td>Marks</td><td>:</td><td>{{userTest.score}}</td></tr>
+							<tr><td>Correct Answers</td><td>:</td><td>{{userTest.totalCorrectAnswers}}</td></tr>
+							<tr><td>Wrong Answers</td><td>:</td><td>{{userTest.totalWrongAnswers}}</td></tr>
+							<tr><td>Test Attempted Date</td><td>:</td><td>{{userTest.testTakenDateTime | date: "MMM dd,y"}} at {{userTest.testTakenDateTime | date: "HH:mm"}}</td></tr>
+								
+						</tbody>
+					</table>
+				</div>
+			</div>
+        </div><!-- panel div length  end-->
+    </div>
+	<div class="panel-heading" ng-if="admindash.userTestPerform.length===0">
+        <h2 align="center">No Test attended yet!!!</h2>
+    </div>
+</p>	
+</div>
+	<!--end of performance record--> 
+</div><!-- end of content3 -->
+
+			</div>
+		</span>          
+	</div>
+</div>
+  <!-- Model for create test type -->
+  <div class="col-lg-12 space"  id="createTest">
+	<div class="row" >
+		<span class="border border-warning">
+			<div class="card">
+				<!-- card Header -->
+				<div class="card-header">
+					<a class="btn btn-link back-space" href="" id="backofcreatetest" >Back</a>
+					<a><b>What Type of Test?</b></a>
+					
+				</div>
+
+				<!-- card body -->
+				<div class="card-body">
+					<form ng-submit="admindash.createATest()">
+						<div class="form-group">
+							<label name="testId" ng-model="admindash.testId"></label>
+							<h5><b>Test Name</b></h5>
+							<input type="text" name="testName" id="testName" ng-model="admindash.testName" class="form-control text-center" placeholder="Enter Test Name" required="true" autofocus="true">
+						</div>
+					
+						<div class="form-group">
+							<h5><b>Test Category</b></h5>					
+							<input type="text" name="testCategory" id="testCategory" ng-model="admindash.testCategory" class="form-control text-center" placeholder="Enter Test Category" required="true">
+						</div>
+										
+						<div class="form-group">
+						    <h5><b>Test Description</b></h5>
+							<input type="text" name="testDetails" id="testDetails"  ng-model="admindash.testDetails" class="form-control text-center" placeholder="Enter Test Details" required="true">
+						</div>
+						<div class="form-group">
+							<h5><b>Total Questions<b></h5>
+							<label name="totalQuestion" ng-model="admindash.totalQuestion" class="form-control" value="5" required="true">5</label>
+						</div>
+						<div class="form-group">
+							<h5><b>Total Marks<b></h5>
+							<label name="totalScore" ng-model="admindash.totalScore" class="form-control" value="5" required="true">5</label>
+						</div>
+									
+						<div class="form-group">
+							<h5><b>Test Duration(In Seconds)</b></h5>	
+							<label  name="testDuration" id="testDuration" ng-model="admindash.testDuration" class="form-control" value="300" required="true">300</label>
+						</div>
+              
+						<div class="form-group" id="createATest">
+							<button type="submit" tabindex="6"  id="submittest" class="btn btn-xl btn-success">Submit</button>
+							
+							
+						</div>
+					</form>
+				</div> <!-- card body close-->
+
+			</div><!-- card  close-->
+		</span>
+	</div><!-- row close-->
+</div><!-- col close-->     
+<!-- model for test type update-->			
+<div class="col-lg-12 space"  id="updateTest">
+	<div class="row" >
+		<span class="border border-warning">
+			<div class="card">
+
+			    <!-- card Header -->
+				<div class="card-header">
+			        <a class="btn btn-link back-space" href="" id="backofupdatetest">Back</a>
+					<a><b>{{admindash.singleTestArray.testName}}</b></a>							
+				</div>
+
+				<!-- card body -->
+				<div class="card-body">
+					<form ng-submit="admindash.updateATest()">
+						<div class="form-group">
+							<label name="testId" ng-model="admindash.testId"></label>
+							<h5><b>Test Name</b></h5>
+							<input type="text" name="testName" class="form-control text-center" id="testName" ng-model="admindash.testName"  required="true" autofocus="true">
+						</div>
+					
+						<div class="form-group">
+							<h5><b>Test Category</b></h5>					
+							<input type="text" name="testCategory" class="form-control text-center" id="testCategory" ng-model="admindash.testCategory"  required="true">
+						</div>
+										
+						<div class="form-group">
+							<h5><b>Test Description</b></h5>
+							<input type="text" name="testDetails" class="form-control text-center" id="testDetails"  ng-model="admindash.testDetails"  required="true">
+						</div>
+						
+						<div class="form-group">
+							<h5><b>Total Questions<b></h5>
+							<label name="totalQuestion" ng-model="admindash.totalQuestion" class="form-control" value="5" required="true">5</label>
+						</div>
+						<div class="form-group">
+							<h5><b>Total Marks<b></h5>
+							<label name="totalScore" class="form-control" ng-model="admindash.totalScore" value="5" required="true">5</label>
+						</div>
+									
+					    <div class="form-group">
+							<h5><b>Test Duration(In Seconds)</b></h5>	
+							<label name="testDuration" class="form-control" id="testDuration" ng-model="admindash.testDuration" value="300" required="true">300</label>
+						</div>
+              
+						<div class="form-group" id="updateATest">
+							<button type="submit" tabindex="6" onclick="myModel();" class="btn btn-xl btn-success">Save</button>
+						</div>
+					</form>
+				</div> <!-- card body close-->
+
+			</div><!-- card close-->
+		</span>	
+	</div><!-- row close-->
+</div><!-- col close-->
+   
+ 
+	<!-- model for test type view -->			
+  <div class="modal fade" id="myModal2">
+					<div class="modal-dialog">
+						<div class="modal-content">
+
+							<!-- Modal Header -->
+							<div class="modal-header">
+								<h4 class="modal-title"><b>{{admindash.singleTestArray.testName}}</b></h4>
+								<button type="button" class="close" data-dismiss="modal">&times;</button>
+							</div>
+
+							<!-- Modal body -->
+							<div class="modal-body">
+							<div class="table-responsive">
+								<table class="table">
+									<tr>
+										
+									<h5><b><td>	Test Name</td><td>:</td><td>{{admindash.singleTestArray.testName}}</td></b></h5>
+
+									</tr>
+									<tr>
+									
+										<h5><b><td>Test Category</td><td>:</td><td>{{admindash.singleTestArray.testCategory}}</td></b></h5>					
+									<tr>
+									
+										
+									<tr>
+									    <h5><b><td>Test Description</td><td>:</td><td>{{admindash.singleTestArray.testDetails}}<td></b></h5>
+
+									</tr>
+									<tr>
+									    <h5><b><td>Total Questions</td><td>:</td><td>{{admindash.singleTestArray.totalQuestion}}<td></b></h5>
+
+									</tr>
+                 
+									<tr>
+										<h5><b><td>Total Marks</td><td>:</td><td>{{admindash.singleTestArray.totalScore}}</td><b></h5>
+
+									</tr>
+									<tr>
+									
+										<h5><b><td>Test Duration(In Seconds)</td><td>:</td><td>{{admindash.singleTestArray.testDuration}}</td></b></h5>	
+
+									
+									</tr>
+								</table>
+							</div>	
+							</div> <!-- model body close-->
+							<div class="modal-footer">
+									<button type="button" class="btn btn-danger" data-dismiss="modal">Close</button>
+							</div>
+						</div><!-- model content close-->
+					</div><!-- model dialog close-->
+				</div><!-- model fade-->
+	
+</section>	
+  </div> <!-- end of ng-controller-->
+
+<script type="text/javascript">
+  $(document).ready(function(){
+      $('#createTest').hide();
+      $('#updateTest').hide();
+      
+	  $('#pnlViewUserTestDet').hide();	
+	  
+	  $('#btnCreate').click(function(){
+         $('#createTest').show();
+          $('#dashAdmin').hide();
+         $('#testName').prop('disabled', false);  
+         $('#updateATest').hide();
+          $('#createATest').show();
+          $('.form-control').val('');
+      });
+  
+      $('#backofcreatetest').click(function(){
+         $('#createTest').hide();
+         $('#dashAdmin').show();
+           $('#updateTest').hide(); 
+    });
+
+	$('#backofupdatetest').click(function(){
+         $('#updateTest').hide();
+         $('#dashAdmin').show();
+         $('#createTest').hide();
+      });
+	  
+	  $('#btnViewPerform').click(function(){
+			$('#allUsers').hide();
+           $('#pnlViewUserTestDet').show();
+      });
+
+	  $('#backTonames').click(function(){
+	   $('#pnlViewUserTestDet').hide();
+	   $('#allUsers').show();
+    });
+});
+</script> 

@@ -1,0 +1,232 @@
+   <!-- Navigation -->
+<div ng-controller="adminCtrl as admindash">
+    <nav class="navbar navbar-expand-lg navbar-light fixed-top" id="mainNav">
+      <div class="container">
+        <a class="navbar-brand js-scroll-trigger" href="">Matricular</a>
+        <button class="navbar-toggler navbar-toggler-right" type="button" data-toggle="collapse" data-target="#navbarResponsive" aria-controls="navbarResponsive" aria-expanded="false" aria-label="Toggle navigation">
+          Menu
+          <i class="fa fa-bars"></i>
+        </button>
+        <div class="collapse navbar-collapse" id="navbarResponsive">
+          <ul class="navbar-nav ml-auto">
+            <li class="nav-item">
+              <a class="nav-link js-scroll-trigger"  style="color:#000;">{{admindash.username}}</a>
+            </li>
+            <li class="nav-item">
+              <a class="nav-link js-scroll-trigger" href="" style="color:#000;" ng-click="admindash.logout()">logout</a>
+            </li>
+          </ul>
+        </div>
+      </div>
+    </nav>
+
+
+<!-- middle section-->
+  <section>
+    <div class="container">
+      <div class="section-heading text-center">
+        <h2>Matricular</h2>
+        <p class="text-muted">An Live Test Taking System!</p>
+        <hr>
+      </div>
+        <div class="col-lg-12 space"  id="dashAdminQuestion" >
+			<div class="row" >
+			<span class="border border-warning">
+				  <!-- test questions-->
+				  
+					<div class="card">
+						<div class="card-header">
+							<a class="btn btn-link back-space"  href="#/admindashboard/{{admindash.userId}}">Back</a>
+							
+							<button type="button" class="btn btn-xl btn-dark" data-toggle="tooltrip"  title="Add Question" id="btnCreateQues">Add Questions</button>	
+							
+						</div>
+						<div class="card-body" id="pnlViewQuestion" ng-init="admindash.viewQuestions(admindash.singleTestId)">
+							<div class="table-responsive" ng-if="admindash.quesArray.length >0">
+								<table class="table table-hover text-center">
+								<thead class="thead-dark">
+								<tr>
+								<th ng-model="admindash.singleTestName" colspan="2">{{admindash.singleTestName}}</th>
+								</tr>
+								</thead>
+								<tbody ng-repeat="question in admindash.quesArray track by $index" align="left">
+								<tr><td style="color:red;">Question {{$index+1}} : {{question.question}} ?</td></tr>
+								<tr><td>1] {{question.optionA}}</td><td>3] {{question.optionC}}</td></tr>
+								<tr><td>2] {{question.optionB}}</td><td>4] {{question.optionD}}</td></tr>
+								
+								<tr><td style="color:green;">Answer: {{question.answer}}</td></tr>
+								<tr>
+								<td>
+								<button class=" btn btn-xl btn-danger" ng-click="admindash.deleteAQuestion($index,question._id)" data-toggle="tooltrip"  title="Delete Question">Delete</button>
+								<button class=" btn btn-xl btn-info"   ng-click="admindash.getSingleQuestionDet($index)"   data-toggle="tooltrip" title="Update Question" id="btnupdateQuest">Update</button>
+								</td>
+								
+								</tr>
+								</tbody>
+								</table>
+							</div>
+								<div  ng-if="admindash.quesArray.length===0">
+									<h4 align="center"><b>No Questios Are Available, Please Add Some Questions!</b></h4>
+								</div>
+						
+						</div> <!-- card-body end-->
+				
+					</div><!-- card end-->
+				
+					
+				</span>
+			</div><!--end of row-->
+		</div>	<!-- end col-->	
+	<!-- Add question model-->	
+<div class="col-lg-12 space"  id="addQuestion">
+		<div class="row" >
+			<span class="border border-warning">	
+				<div class="card">
+				<!-- card Header -->
+					<div class="card-header">
+
+						<a class="btn btn-link back-space" href="" id="backofaddquestion">Back</a>
+						
+						<a class="btn btn-link"><b>{{admindash.singleTestName}}</b></a>
+					</div>
+
+					<!-- card body -->
+					<div class="card-body">
+						<form ng-submit="admindash.createQuestions()">
+									<div class="form-group">
+										<a style="color:red;">Please Do Not Add - <b>&nbsp;  '?' &nbsp; </b> At The End Of Question</a>
+										<h5><b>Question -</b></h5>
+									    <input type="text" name="Question" ng-model="admindash.question" class="form-control" placeholder="Enter Question" required="true" autofocus="true">
+									</div>
+					
+									<div class="form-group">
+										<h5><b>Option 1.</b></h5>					
+										<input type="text"  ng-model="admindash.optionA" class="form-control" placeholder="Enter First Option" required="true">
+									</div>
+										
+									<div class="form-group">
+									    <h5><b>Option 2.</b></h5>
+										<input type="text"  ng-model="admindash.optionB" class="form-control" placeholder="Enter second Option" required="true">
+									</div>
+                 
+									<div class="form-group">
+										<h5><b>Option 3.<b></h5>
+										<input type="text"  ng-model="admindash.optionC" class="form-control" placeholder="Enter Third Option" required="true">
+									</div>
+									
+									<div class="form-group">
+										<h5><b>Option 4.</b></h5>	
+										<input type="text"   ng-model="admindash.optionD" class="form-control" placeholder="Enter Fourth Option" required="true">
+									</div>
+                                    <div class="form-group">
+                                        <h5><b>Answer - </b></h5>
+                                        <input type="number" id="Answer" ng-model="admindash.answer" class="form-control" placeholder="Enter Option Number"  required="true">
+                                    </div>				
+									<div class="form-group">
+										<button type="submit"  class="btn btn-xl btn-success">Submit</button>
+										<button type="button"  id="finish" class="btn btn-xl btn-danger">Finish</button>
+									</div>
+						</form>
+					</div> <!-- card body end-->
+				</div><!-- card end-->
+			</span>
+		</div><!-- row end-->
+	</div><!-- col end-->	
+<!-- update question Model-->
+
+<div class="col-lg-12" style="padding-left:100px;" id="updateQuestion">
+		<div class="row" >
+				<span class="border border-warning">	
+					<div class="card">
+					<div class="card-header">
+
+						<a class="btn btn-link" href="" id="backofupdatequestion" style="padding-right:700px;">Back</a>
+						<a class="btn btn-link "><b>{{admindash.singleTestName}}</b></a>
+
+					</div>
+
+					<!-- card body -->
+					<div class="card-body">
+						<form ng-submit="admindash.updateAQuestion(admindash.singleQuesIndex)">
+									<div class="form-group">
+
+										<h5><b>Question -</b></h5>
+									    <input type="text" name="Question" ng-model="admindash.question" class="form-control" placeholder="Enter Question" required="true" autofocus="true">
+									</div>
+					
+									<div class="form-group">
+										<h5><b>Option 1.</b></h5>					
+										<input type="text"  ng-model="admindash.optionA" class="form-control" placeholder="Enter First Option" required="true">
+									</div>
+										
+									<div class="form-group">
+									    <h5><b>Option 2.</b></h5>
+										<input type="text"  ng-model="admindash.optionB" class="form-control" placeholder="Enter second Option" required="true">
+									</div>
+                 
+									<div class="form-group">
+										<h5><b>Option 3.<b></h5>
+										<input type="text"  ng-model="admindash.optionC" class="form-control" placeholder="Enter Third Option" required="true">
+									</div>
+									
+									<div class="form-group">
+										<h5><b>Option 4.</b></h5>	
+										<input type="text"   ng-model="admindash.optionD" class="form-control" placeholder="Enter Fourth Option" required="true">
+									</div>
+                                    <div class="form-group">
+                                        <h5><b>Answer - </b></h5>
+                                        <input type="number"  ng-model="admindash.answer" class="form-control" placeholder="Enter Option Number"  required="true">
+                                    </div>				
+									<div class="form-group">
+										<button type="submit"  class="btn btn-xl btn-success" >Save</button>
+
+									</div>
+						</form>
+					</div> <!-- card body close-->
+
+				</div><!-- card end-->	
+			</span>
+		</div><!--row end-->
+		
+	</div>	<!--col end-->	
+	
+	</div>			<!-- end of container-->
+</section>	
+<!--section end-->
+							  
+
+<script type="text/javascript">
+  $(document).ready(function(){
+      $('#addQuestion').hide();;
+      $('#updateQuestion').hide(); 
+       
+
+      $('#btnCreateQues').click(function(){
+        $('#addQuestion').show();
+          $('#dashAdminQuestion').hide();   
+          $('.form-control').val('');
+           $('#updateQuestion').hide(); 
+         
+      });
+
+  
+      $('#backofaddquestion').click(function(){
+          $('#dashAdminQuestion').show();   
+           $('#addQuestion').hide();
+            $('#updateQuestion').hide();
+
+    });
+	$('#finish').click(function(){
+          $('#dashAdminQuestion').show();   
+           $('#addQuestion').hide();
+            $('#updateQuestion').hide();
+
+    });
+	    $('#backofupdatequestion').click(function(){
+          $('#dashAdminQuestion').show();   
+           $('#addQuestion').hide();
+            $('#updateQuestion').hide();
+
+    });
+});
+</script> 
