@@ -1,7 +1,7 @@
 {
-  "name": "SkillMock",
+  "name": "Matricular",
   "version": "1.0.0",
-  "description": "A SPA(single page Application) for Online Test Taking System",
+  "description": "A Single Page Application For Live Test Taking System",
   "main": "app.js",
   "scripts": {
     "test": "echo \"Error: no test specified\" && exit 1"
@@ -15,7 +15,6 @@
     "angular.js",
     "Express.js"
   ],
-  "author": "Kousalya M V",
   "dependencies": {
     "async": "^2.6.0",
     "bcrypt-nodejs": "0.0.3",
