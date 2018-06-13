@@ -14,7 +14,7 @@ Any Question, Any Test.<br/>
 <br/>
 
 ## You Can Visit Site - <br/>
-http://ec2-13-126-30-1.ap-south-1.compute.amazonaws.com:1993 <br/>
+http://ec2-13-232-45-98.ap-south-1.compute.amazonaws.com/#/  <br/>
 
 ## Frontend Technologies : <br/>
 HTML 5, CSS, Javascript , Jquery and AngularJS <br/>
